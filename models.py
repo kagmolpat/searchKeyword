@@ -1,7 +1,12 @@
-from app import db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from datetime import datetime
+
+app = Flask(__name__)
+app.config.from_pyfile('config.py')
+db = SQLAlchemy(app)
 
 
 class SearchKeyword(db.Model):
@@ -34,5 +39,3 @@ class CountKeyword(db.Model):
 #         self.keyword_name = keyword_name
 #         self.count_keyword = count_keyword
 #         self.count_datetime = func.current_date()
-
-

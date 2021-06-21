@@ -8,8 +8,10 @@
 <body>
     <h1>Index</h1>
     <h3>keyword {{ keyword }}</h3>
-    <form action="/get_keyword" method="post">
-        <input type="text" name="keywords">
+    <form action="/<keyword>" method="post">
+        <label>
+            <input type="text" name="keyword">
+        </label>
         <input type="submit" value="Search">
     </form>
 </body>
