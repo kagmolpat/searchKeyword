@@ -1,6 +1,7 @@
-from flask import render_template, request, session, redirect, url_for
-from models import db, SearchKeyword, app
+from flask import render_template, request, session, redirect, url_for, jsonify
+from models import db, app, SearchKeyword, CountKeyword
 from datetime import datetime
+import json
 
 
 @app.route("/", methods=["POST", "GET"])
@@ -11,8 +12,8 @@ def get_keyword():
         print("Keyword : " + keyword)
 
         # Add data to DB
-        keyword_search_db = SearchKeyword(keyword, search_datetime=datetime.utcnow())
-        db.session.add(keyword_search_db)
+        keyword_search = SearchKeyword(keyword, search_datetime=datetime.utcnow())
+        db.session.add(keyword_search)
         db.session.commit()
 
         return redirect(url_for("keyword", keyword=keyword))
@@ -26,5 +27,5 @@ def show_keyword(keyword):
 
 
 if __name__ == '__main__':
-    db.create_all()
+    # db.create_all()
     app.run()
