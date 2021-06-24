@@ -31,7 +31,8 @@ class CountKeyword(db.Model):
         return {
             'count_id': self.count_id,
             'count_date': self.count_date,
-            'count_output': self.serialize_count
+            'count_output': db.session.query(func.count(SearchKeyword.keyword), SearchKeyword.keyword)
+                            .group_by(SearchKeyword.keyword).order_by(func.current_date()).all()
         }
 
 
@@ -43,7 +44,7 @@ class AlchemyEncoder(json.JSONEncoder):
             for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
                 data = obj.__getattribute__(field)
                 try:
-                    json.dumps(data) # this will fail on non-encodable values, like other classes
+                    json.dumps(data)  # this will fail on non-encodable values, like other classes
                     fields[field] = data
                 except TypeError:
                     fields[field] = None
