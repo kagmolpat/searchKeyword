@@ -1,7 +1,5 @@
 import json
-
 from sqlalchemy.sql.functions import current_date
-
 from app import db
 from models import SearchKeyword, CountKeyword, datetime, AlchemyEncoder
 from sqlalchemy import func

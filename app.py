@@ -5,9 +5,9 @@ import json
 
 
 @app.route("/", methods=["POST", "GET"])
-def get_keyword():
+def add_keyword():
     if request.method == "POST":
-        session.permanent = True
+        # session.permanent = True
         keyword = request.form['keyword']
         print("Keyword : " + keyword)
 
@@ -16,12 +16,12 @@ def get_keyword():
         db.session.add(keyword_search)
         db.session.commit()
 
-        return redirect(url_for("keyword", keyword=keyword))
+        return redirect(url_for("show_keyword", keyword=keyword))
     else:
         return render_template("index.html")
 
 
-@app.route("/<keyword>", methods=["POST", "GET"])
+@app.route("/keyword/<keyword>", methods=["POST", "GET"])
 def show_keyword(keyword):
     return f"<h1> Keyword : {keyword} </h1>"
 
