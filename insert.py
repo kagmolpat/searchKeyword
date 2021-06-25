@@ -26,8 +26,8 @@ print(keywords)
 
 # count query result
 cd = db.session.query(func.count(SearchKeyword.keyword), SearchKeyword.keyword)\
-    .filter(SearchKeyword.search_datetime == datetime.datetime(2021, 6, 25))\
     .group_by(SearchKeyword.keyword).order_by(func.current_date()).all()
+# .filter(SearchKeyword.search_datetime == datetime.datetime(2021, 6, 25))\
 # type of query result
 print("type of count result: ")
 print(type(cd))
